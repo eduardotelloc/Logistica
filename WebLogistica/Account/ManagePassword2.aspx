@@ -1,0 +1,150 @@
+﻿<%@ Page Title="Cambio de Contraseña" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="ManagePassword2.aspx.cs" Inherits="WebLogistica.Account.ManagePassword2" %>
+
+<asp:Content ID="BodyContent" ContentPlaceHolderID="MainContent" runat="server">
+    
+    <script src="../Scripts/jquery-ui-1.12.1.js"></script>
+    <script src="../Scripts/jquery.blockUI.js"></script>
+    <script src="../Scripts/jquery.general-1.3.0.js"></script>
+    <link href="../Content/themes/base/jquery-ui.css" rel="stylesheet" />
+
+    <style type="text/css">
+       
+        .text {
+            height:18px;
+        }
+
+       
+       .label1 {
+            
+            color:  #545454;
+            font-size: 28px;/* Aproximación debida a la sustitución de la fuente */
+            font-weight: 400;
+            line-height: 28px;/* Aproximación debida a la sustitución de la fuente */
+            text-align: left;
+        }
+
+        .label2 {
+          
+            color:  #000000;
+            font-size: 28px;/* Aproximación debida a la sustitución de la fuente */
+            font-weight: 400;
+            line-height: 28px;/* Aproximación debida a la sustitución de la fuente */
+            text-align: left;
+        }
+       
+    </style>
+
+
+    <div class="row">
+        <div class="col-md-12">
+            <span class="label1">Contraseña</span>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12" style="text-align:right">
+            <a href="#" onclick="window.location.href='../Menu.aspx'" title="Volver al Menu"><img src="Img/back.png"/></a>
+        </div>
+    </div>
+
+   
+    <div class="form-horizontal">
+        <section id="passwordForm">
+            <asp:PlaceHolder runat="server" ID="setPassword" Visible="false">
+               
+                <div class="form-horizontal">
+                    <asp:ValidationSummary runat="server" ShowModelStateErrors="true" CssClass="text-danger" />
+                    <hr />
+                    <div class="form-group">
+                        <div class="col-md-2">
+                            <asp:Label runat="server" AssociatedControlID="password">Contraseña</asp:Label>
+                        </div>
+                        <div class="col-md-4">
+                            <asp:TextBox runat="server" ID="password" TextMode="Password" CssClass="form-control" />
+                            <asp:RequiredFieldValidator runat="server" ControlToValidate="password"
+                                CssClass="text-danger" ErrorMessage="The password field is required."
+                                Display="Dynamic" ValidationGroup="SetPassword" />
+                            <asp:ModelErrorMessage runat="server" ModelStateKey="NewPassword" AssociatedControlID="password"
+                                CssClass="text-danger" SetFocusOnError="true" />
+                        </div>
+                        <div class="col-md-6"></div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-md-2">
+                         <asp:Label runat="server" AssociatedControlID="confirmPassword">Confirmar Contraseña</asp:Label>
+                        </div>  
+                        <div class="col-md-4">
+                            <asp:TextBox runat="server" ID="confirmPassword" TextMode="Password" CssClass="form-control" />
+                            <asp:RequiredFieldValidator runat="server" ControlToValidate="confirmPassword"
+                                CssClass="text-danger" Display="Dynamic" ErrorMessage="The confirm password field is required."
+                                ValidationGroup="SetPassword" />
+                            <asp:CompareValidator runat="server" ControlToCompare="Password" ControlToValidate="confirmPassword"
+                                CssClass="text-danger" Display="Dynamic" ErrorMessage="The password and confirmation password do not match."
+                                ValidationGroup="SetPassword" />
+
+                        </div>
+                        <div class="col-md-6"></div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-4"></div>
+                        <div class="col-md-2">
+                            <asp:Button runat="server" Text="Grabar" ValidationGroup="SetPassword" OnClick="SetPassword_Click" CssClass="btn btn-danger" />
+                        </div>
+                        <div class="col-md-6"></div>
+                    </div>
+                </div>
+            </asp:PlaceHolder>
+
+            <asp:PlaceHolder runat="server" ID="changePasswordHolder" Visible="false">
+                <div class="form-horizontal">
+                    <hr />
+                    <asp:ValidationSummary runat="server" ShowModelStateErrors="true" CssClass="text-danger" />
+                    <div class="form-group">
+                        <div class="col-md-2">
+                            <asp:Label runat="server" ID="CurrentPasswordLabel" AssociatedControlID="CurrentPassword" CssClass="col-md-2 control-label">Current password</asp:Label>
+                        </div>
+                        <div class="col-md-4">
+                            <asp:TextBox runat="server" ID="CurrentPassword" TextMode="Password" CssClass="form-control" />
+                            <asp:RequiredFieldValidator runat="server" ControlToValidate="CurrentPassword"
+                                CssClass="text-danger" ErrorMessage="The current password field is required."
+                                ValidationGroup="ChangePassword" />
+                        </div>
+                        <div class="col-md-6"></div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-2">
+                            <asp:Label runat="server" ID="NewPasswordLabel" AssociatedControlID="NewPassword" CssClass="col-md-2 control-label">New password</asp:Label>
+                        </div>
+                        <div class="col-md-4">
+                            <asp:TextBox runat="server" ID="NewPassword" TextMode="Password" CssClass="form-control" />
+                            <asp:RequiredFieldValidator runat="server" ControlToValidate="NewPassword"
+                                CssClass="text-danger" ErrorMessage="The new password is required."
+                                ValidationGroup="ChangePassword" />
+                        </div>
+                        <div class="col-md-6"></div>
+                    </div>
+                    <div class="form-group">
+                        <asp:Label runat="server" ID="ConfirmNewPasswordLabel" AssociatedControlID="ConfirmNewPassword" CssClass="col-md-2 control-label">Confirm new password</asp:Label>
+                        <div class="col-md-10">
+                            <asp:TextBox runat="server" ID="ConfirmNewPassword" TextMode="Password" CssClass="form-control" />
+                            <asp:RequiredFieldValidator runat="server" ControlToValidate="ConfirmNewPassword"
+                                CssClass="text-danger" Display="Dynamic" ErrorMessage="Confirm new password is required."
+                                ValidationGroup="ChangePassword" />
+                            <asp:CompareValidator runat="server" ControlToCompare="NewPassword" ControlToValidate="ConfirmNewPassword"
+                                CssClass="text-danger" Display="Dynamic" ErrorMessage="The new password and confirmation password do not match."
+                                ValidationGroup="ChangePassword" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-2"></div>
+                        <div class="col-md-offset-2 col-md-4">
+                            <asp:Button runat="server" Text="Grabar" ValidationGroup="ChangePassword" OnClick="ChangePassword_Click" CssClass="btn btn-danger" />
+                        </div>
+                        <div class="col-md-6"></div>
+                    </div>
+                </div>
+            </asp:PlaceHolder>
+        </section>
+    </div>
+</asp:Content>

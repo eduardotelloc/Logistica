@@ -1,0 +1,81 @@
+table {
+	border: 1px solid #545454;
+	border-collapse: collapse;
+	font-size: 11.5px;
+}
+
+table td, .table th {
+	border: 1px solid #545454;
+	vertical-align: middle;
+	font-size: 13px;
+	font-family: Calibri;
+}
+
+.table > thead > tr > th {
+	border: 1px solid #545454;
+}
+
+table th {
+	color: #000;
+	text-align: center;
+	background-color: #FFC312;
+}
+
+table td {
+	color: #000;
+	height: 18px;
+	padding-left: 2px;
+	padding-right: 2px;
+}
+
+.table tbody tr:hover {
+	color: white;
+	background-color: orange;
+	cursor: pointer;
+}
+
+.text {
+	height: 18px;
+}
+
+.totheright {
+	text-align: right;
+}
+
+tr:nth-child(odd) {
+	background-color: #f2f2f2;
+}
+
+tr:nth-child(even) {
+	background-color: #FFF;
+}
+
+.label1 {
+	color: #545454;
+	font-size: 28px; /* Aproximación debida a la sustitución de la fuente */
+	font-weight: 400;
+	line-height: 28px; /* Aproximación debida a la sustitución de la fuente */
+	text-align: left;
+}
+
+.label2 {
+	color: #000000;
+	font-size: 28px; /* Aproximación debida a la sustitución de la fuente */
+	font-weight: 400;
+	line-height: 28px; /* Aproximación debida a la sustitución de la fuente */
+	text-align: left;
+}
+
+.ui-widget-header {
+	background-color: #FFC312;
+}
+
+input:required {
+	border-color: brown;
+	background-color: #FAEBE8;
+}
+
+textarea:required {
+	border-color: brown;
+	background-color: #FAEBE8;
+}
